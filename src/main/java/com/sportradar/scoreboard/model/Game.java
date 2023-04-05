@@ -86,10 +86,6 @@ public class Game {
 		return EqualsBuilder.reflectionEquals(this, obj, "creationTime");
 	}
 
-	private static boolean isCorrectTeamName(String nameTeam) {
-		return !StringUtils.isBlank(nameTeam);
-	}
-
 	public boolean validateNameTeam(String nameTeam) {
 
 		if (!isCorrectTeamName(nameTeam)) {
@@ -106,6 +102,10 @@ public class Game {
 		}
 
 		return true;
+	}
+
+	private boolean isCorrectTeamName(String nameTeam) {
+		return !StringUtils.isBlank(nameTeam);
 	}
 
 }

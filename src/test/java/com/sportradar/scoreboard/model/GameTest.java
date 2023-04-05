@@ -76,7 +76,7 @@ class GameTest {
 	@Test
 	void giveGameWithIncorrectScoreHomeTeam_whenNewGame_thenReturnValidationGameException() {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
-			Game game = createGame(HOME_TEAM, AWAY_TEAM, NEGATIVE_SCORE, AWAY_SCORE);
+			createGame(HOME_TEAM, AWAY_TEAM, NEGATIVE_SCORE, AWAY_SCORE);
 		});
 		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE));
 	}
@@ -84,7 +84,7 @@ class GameTest {
 	@Test
 	void giveGameWithIncorrectScoreAwayTeam_whenNewGame_thenReturnValidationGameException() {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
-			Game game = createGame(HOME_TEAM, AWAY_TEAM, HOME_SCORE, NEGATIVE_SCORE);
+			createGame(HOME_TEAM, AWAY_TEAM, HOME_SCORE, NEGATIVE_SCORE);
 		});
 		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE));
 	}
