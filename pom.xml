@@ -20,6 +20,7 @@
 		<!-- Plugin versions -->
 		<maven.resources>3.3.1</maven.resources>
 		<maven.compiler>3.11.0</maven.compiler>
+		<maven.surefire>3.0.0</maven.surefire>
 
 	</properties>
 
@@ -45,6 +46,10 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven.compiler}</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire}</version>
 			</plugin>
 
 		</plugins>
