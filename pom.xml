@@ -16,17 +16,27 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<!-- Dependencies versions -->
 		<junit>5.9.2</junit>
+		<commons.lang3>3.12.0</commons.lang3>
 		<!-- Plugin versions -->
 		<maven.resources>3.3.1</maven.resources>
 		<maven.compiler>3.11.0</maven.compiler>
 		<maven.surefire>3.0.0</maven.surefire>
+		<jacoco>0.8.9</jacoco>
+		<sonar>3.9.1.2184</sonar>
+
 
 	</properties>
 
 
 	<dependencies>
 		<!-- Dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3}</version>
+		</dependency>
 
 		<!-- Testing dependencies-->
 		<dependency>
@@ -50,6 +60,38 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven.surefire}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>${sonar}</version>
 			</plugin>
 
 		</plugins>
