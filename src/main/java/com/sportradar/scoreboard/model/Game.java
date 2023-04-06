@@ -8,6 +8,9 @@ import com.sportradar.scoreboard.validator.GameValidador;
 /**
  * Represents a game in our live scoreBoard
  * 
+ * To uniquely identify a game, the pair homeTeam and awayTeam is used as a
+ * unique key
+ * 
  * @author oasaustre
  *
  */
@@ -84,6 +87,5 @@ public class Game {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj, "creationTime");
 	}
-
 
 }

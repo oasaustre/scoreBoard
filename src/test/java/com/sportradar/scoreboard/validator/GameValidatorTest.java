@@ -10,13 +10,17 @@ import com.sportradar.scoreboard.exception.ValidationGameException;
 
 class GameValidatorTest {
 
+	private static final String TEAM_NAME_1 = "Spain";
+	private static final String TEAM_NAME_2 = "Sri Lanka";
+	private static final int SCORE_VALID_1 = 0;
+	private static final int SCORE_VALID_2 = 5;
+	private static final int SCORE_INVALID = -3;
+
 	@Test
 	void givenGameValidator_whenNameTeamIsCorrect_thenReturnTrue() {
-		String nameTeamCorrect1 = "Spain";
-		String nameTeamCorrect2 = "Sri Lanka";
 
-		assertTrue(GameValidador.validateNameTeam(nameTeamCorrect1));
-		assertTrue(GameValidador.validateNameTeam(nameTeamCorrect2));
+		assertTrue(GameValidador.validateNameTeam(TEAM_NAME_1));
+		assertTrue(GameValidador.validateNameTeam(TEAM_NAME_2));
 	}
 
 	@Test
@@ -40,21 +44,18 @@ class GameValidatorTest {
 
 	@Test
 	void givenGameValidator_whenScoreGreaterEqualThanZero_thenReturnTrue() {
-		int score1 = 0;
-		int score2 = 5;
 
-		assertTrue(GameValidador.validateScore(score1));
-		assertTrue(GameValidador.validateScore(score2));
+		assertTrue(GameValidador.validateScore(SCORE_VALID_1));
+		assertTrue(GameValidador.validateScore(SCORE_VALID_2));
 	}
 
 	@Test
 	void givenGameValidator_whenScoreLessThanZero_thenReturnValidationException() {
-		int score = -3;
 
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
-			GameValidador.validateScore(score);
+			GameValidador.validateScore(SCORE_INVALID);
 		});
 
-		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, score));
+		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, SCORE_INVALID));
 	}
 }
