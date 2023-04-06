@@ -3,6 +3,7 @@ package com.sportradar.scoreboard.validator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,5 +58,10 @@ class GameValidatorTest {
 		});
 
 		assertEquals(String.format("%s:%d", ValidationGameException.SCORE_VALID, SCORE_INVALID), ex.getMessage());
+	}
+	
+	@Test
+	void givenGameValidator_whenNameTeamTooLong_thenReturnValidationException() {
+		fail("Not implemented!!");
 	}
 }

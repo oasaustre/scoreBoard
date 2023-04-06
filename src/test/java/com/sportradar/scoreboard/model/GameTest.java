@@ -3,6 +3,7 @@ package com.sportradar.scoreboard.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -105,6 +106,11 @@ class GameTest {
 
 		assertEquals(String.format("%s-%s", HOME_TEAM, AWAY_TEAM), firstGame.getKey());
 		assertEquals(String.format("%s-%s", OTHER_HOME_TEAM, OTHER_AWAY_TEAM), secondGame.getKey());
+	}
+	
+	@Test
+	void giveGameWithNameTeamTooLong_whenNewGame_thenThrowsValidationGameException() {
+		fail("Not implements!!");
 	}
 
 	private Game createGame(String homeTeam, String awayTeam, int homeScore, int awayScore) {
