@@ -3,7 +3,6 @@ package com.sportradar.scoreboard.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +29,9 @@ class GameTest {
 	private static final int HOME_SCORE = 5;
 	private static final int AWAY_SCORE = 1;
 	private static final int NEGATIVE_SCORE = -5;
+	private static final String TEAM_TOO_LONG = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis "
+			+ "parturient montes, nascetur ridiculus mus.";
 
 	@Test
 	void givenThreeGames_whenCompareGames_thenGamesAreTheSame() {
@@ -107,10 +109,35 @@ class GameTest {
 		assertEquals(String.format("%s-%s", HOME_TEAM, AWAY_TEAM), firstGame.getKey());
 		assertEquals(String.format("%s-%s", OTHER_HOME_TEAM, OTHER_AWAY_TEAM), secondGame.getKey());
 	}
-	
+
 	@Test
 	void giveGameWithNameTeamTooLong_whenNewGame_thenThrowsValidationGameException() {
-		fail("Not implements!!");
+
+		Exception ex1 = assertThrows(ValidationGameException.class, () -> {
+			new Game(TEAM_TOO_LONG, AWAY_TEAM);
+		});
+
+		Exception ex2 = assertThrows(ValidationGameException.class, () -> {
+			new Game(HOME_TEAM, TEAM_TOO_LONG);
+		});
+
+		Exception ex3 = assertThrows(ValidationGameException.class, () -> {
+			new Game(TEAM_TOO_LONG, AWAY_TEAM, HOME_SCORE, AWAY_SCORE);
+		});
+
+		Exception ex4 = assertThrows(ValidationGameException.class, () -> {
+			new Game(HOME_TEAM, TEAM_TOO_LONG, HOME_SCORE, AWAY_SCORE);
+		});
+
+		assertEquals(String.format("%s - Expected: %d Found: %d", ValidationGameException.TEAM_NAME_TOO_LONG, 100,
+				TEAM_TOO_LONG.length()), ex1.getMessage());
+		assertEquals(String.format("%s - Expected: %d Found: %d", ValidationGameException.TEAM_NAME_TOO_LONG, 100,
+				TEAM_TOO_LONG.length()), ex2.getMessage());
+		assertEquals(String.format("%s - Expected: %d Found: %d", ValidationGameException.TEAM_NAME_TOO_LONG, 100,
+				TEAM_TOO_LONG.length()), ex3.getMessage());
+		assertEquals(String.format("%s - Expected: %d Found: %d", ValidationGameException.TEAM_NAME_TOO_LONG, 100,
+				TEAM_TOO_LONG.length()), ex4.getMessage());
+
 	}
 
 	private Game createGame(String homeTeam, String awayTeam, int homeScore, int awayScore) {

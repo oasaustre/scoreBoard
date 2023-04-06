@@ -3,7 +3,6 @@ package com.sportradar.scoreboard.validator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +15,9 @@ class GameValidatorTest {
 	private static final int SCORE_VALID_1 = 0;
 	private static final int SCORE_VALID_2 = 5;
 	private static final int SCORE_INVALID = -3;
+	private static final String TEAM_TOO_LONG = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis "
+			+ "parturient montes, nascetur ridiculus mus.";
 
 	@Test
 	void givenGameValidator_whenNameTeamIsCorrect_thenReturnTrue() {
@@ -59,9 +61,15 @@ class GameValidatorTest {
 
 		assertEquals(String.format("%s:%d", ValidationGameException.SCORE_VALID, SCORE_INVALID), ex.getMessage());
 	}
-	
+
 	@Test
 	void givenGameValidator_whenNameTeamTooLong_thenReturnValidationException() {
-		fail("Not implemented!!");
+
+		Exception ex = assertThrows(ValidationGameException.class, () -> {
+			GameValidador.validateLengthNameTeam(TEAM_TOO_LONG);
+		});
+
+		assertEquals(String.format("%s - Expected: %d Found: %d", ValidationGameException.TEAM_NAME_TOO_LONG, 100,
+				TEAM_TOO_LONG.length()), ex.getMessage());
 	}
 }

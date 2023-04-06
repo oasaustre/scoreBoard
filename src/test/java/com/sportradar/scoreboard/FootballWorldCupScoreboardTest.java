@@ -19,11 +19,6 @@ import com.sportradar.scoreboard.model.Game;
 
 class FootballWorldCupScoreboardTest {
 	
-	private static final int AWAY_SCORE = 2;
-	private static final int HOME_SCORE = 4;
-	private static final int EXPECTED_AWAY_SCORE = 2;
-	private static final int EXPECTED_HOME_SCORE = 4;
-
 	private static final String AWAY_TEAM = "Brazil";
 	private static final String HOME_TEAM = "Spain";
 

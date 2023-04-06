@@ -26,6 +26,8 @@ public class Game {
 
 		GameValidador.validateNameTeam(homeTeam);
 		GameValidador.validateNameTeam(awayTeam);
+		GameValidador.validateLengthNameTeam(homeTeam);
+		GameValidador.validateLengthNameTeam(awayTeam);
 
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
@@ -38,6 +40,8 @@ public class Game {
 
 		GameValidador.validateNameTeam(homeTeam);
 		GameValidador.validateNameTeam(awayTeam);
+		GameValidador.validateLengthNameTeam(homeTeam);
+		GameValidador.validateLengthNameTeam(awayTeam);
 		GameValidador.validateScore(homeScore);
 		GameValidador.validateScore(awayScore);
 
