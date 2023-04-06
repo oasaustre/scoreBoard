@@ -78,6 +78,10 @@ public class Game {
 		return creationTime;
 	}
 
+	public String getKey() {
+		return String.format("%s-%s", this.homeTeam, this.awayTeam);
+	}
+
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this, "creationTime");

@@ -62,7 +62,7 @@ class GameTest {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
 			new Game(null, AWAY_TEAM);
 		});
-		assertEquals(ex.getMessage(), String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, null));
+		assertEquals(String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, null), ex.getMessage());
 	}
 
 	@Test
@@ -70,7 +70,7 @@ class GameTest {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
 			new Game(HOME_TEAM, null);
 		});
-		assertEquals(ex.getMessage(), String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, null));
+		assertEquals(String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, null), ex.getMessage());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ class GameTest {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
 			createGame(HOME_TEAM, AWAY_TEAM, NEGATIVE_SCORE, AWAY_SCORE);
 		});
-		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE));
+		assertEquals(String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE), ex.getMessage());
 	}
 
 	@Test
@@ -86,7 +86,7 @@ class GameTest {
 		Exception ex = assertThrows(ValidationGameException.class, () -> {
 			createGame(HOME_TEAM, AWAY_TEAM, HOME_SCORE, NEGATIVE_SCORE);
 		});
-		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE));
+		assertEquals(String.format("%s:%d", ValidationGameException.SCORE_VALID, NEGATIVE_SCORE), ex.getMessage());
 	}
 
 	@Test
@@ -96,6 +96,15 @@ class GameTest {
 
 		assertTrue(firstGame.getCreationTime() > 0);
 		assertTrue(secondGame.getCreationTime() > 0);
+	}
+
+	@Test
+	void giveGameCorrect_whenNewGame_thenCheckKeyHaveCorrectFormat() {
+		Game firstGame = new Game(HOME_TEAM, AWAY_TEAM);
+		Game secondGame = new Game(OTHER_HOME_TEAM, OTHER_AWAY_TEAM, HOME_SCORE, AWAY_SCORE);
+
+		assertEquals(String.format("%s-%s", HOME_TEAM, AWAY_TEAM), firstGame.getKey());
+		assertEquals(String.format("%s-%s", OTHER_HOME_TEAM, OTHER_AWAY_TEAM), secondGame.getKey());
 	}
 
 	private Game createGame(String homeTeam, String awayTeam, int homeScore, int awayScore) {

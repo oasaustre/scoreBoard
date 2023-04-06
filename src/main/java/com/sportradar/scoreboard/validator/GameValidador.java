@@ -3,6 +3,7 @@ package com.sportradar.scoreboard.validator;
 import org.apache.commons.lang3.StringUtils;
 
 import com.sportradar.scoreboard.exception.ValidationGameException;
+import com.sportradar.scoreboard.model.Game;
 
 /**
  * Represents a game properties validator
@@ -36,5 +37,13 @@ public class GameValidador {
 
 	private static boolean isCorrectTeamName(String nameTeam) {
 		return !StringUtils.isBlank(nameTeam);
+	}
+
+	public static boolean validateGameNotNull(Game game) {
+		if (game == null) {
+			throw new ValidationGameException(ValidationGameException.GAME_CANNOT_BE_NULL);
+		}
+
+		return true;
 	}
 }

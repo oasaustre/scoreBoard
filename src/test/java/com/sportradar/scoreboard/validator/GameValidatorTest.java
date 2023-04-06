@@ -36,10 +36,10 @@ class GameValidatorTest {
 			GameValidador.validateNameTeam(nameTeamIncorrect2);
 		});
 
-		assertEquals(ex1.getMessage(),
-				String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, nameTeamIncorrect1));
-		assertEquals(ex2.getMessage(),
-				String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, nameTeamIncorrect2));
+		assertEquals(String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, nameTeamIncorrect1),
+				ex1.getMessage());
+		assertEquals(String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, nameTeamIncorrect2),
+				ex2.getMessage());
 	}
 
 	@Test
@@ -56,6 +56,6 @@ class GameValidatorTest {
 			GameValidador.validateScore(SCORE_INVALID);
 		});
 
-		assertEquals(ex.getMessage(), String.format("%s:%d", ValidationGameException.SCORE_VALID, SCORE_INVALID));
+		assertEquals(String.format("%s:%d", ValidationGameException.SCORE_VALID, SCORE_INVALID), ex.getMessage());
 	}
 }
