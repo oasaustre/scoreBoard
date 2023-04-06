@@ -1,10 +1,9 @@
 package com.sportradar.scoreboard.model;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.sportradar.scoreboard.exception.ValidationGameException;
+import com.sportradar.scoreboard.validator.GameValidador;
 
 /**
  * Represents a game in our live scoreBoard
@@ -22,8 +21,8 @@ public class Game {
 
 	public Game(String homeTeam, String awayTeam) {
 
-		validateNameTeam(homeTeam);
-		validateNameTeam(awayTeam);
+		GameValidador.validateNameTeam(homeTeam);
+		GameValidador.validateNameTeam(awayTeam);
 
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
@@ -34,10 +33,10 @@ public class Game {
 
 	public Game(String homeTeam, String awayTeam, int homeScore, int awayScore) {
 
-		validateNameTeam(homeTeam);
-		validateNameTeam(awayTeam);
-		validateScore(homeScore);
-		validateScore(awayScore);
+		GameValidador.validateNameTeam(homeTeam);
+		GameValidador.validateNameTeam(awayTeam);
+		GameValidador.validateScore(homeScore);
+		GameValidador.validateScore(awayScore);
 
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
@@ -59,7 +58,7 @@ public class Game {
 	}
 
 	public void setHomeScore(int homeScore) {
-		validateScore(homeScore);
+		GameValidador.validateScore(homeScore);
 		this.homeScore = homeScore;
 	}
 
@@ -68,7 +67,7 @@ public class Game {
 	}
 
 	public void setAwayScore(int awayScore) {
-		validateScore(awayScore);
+		GameValidador.validateScore(awayScore);
 		this.awayScore = awayScore;
 	}
 
@@ -86,26 +85,5 @@ public class Game {
 		return EqualsBuilder.reflectionEquals(this, obj, "creationTime");
 	}
 
-	public boolean validateNameTeam(String nameTeam) {
-
-		if (!isCorrectTeamName(nameTeam)) {
-			throw new ValidationGameException(
-					String.format("%s:%s", ValidationGameException.TEAM_NAME_VALID, nameTeam));
-		}
-
-		return true;
-	}
-
-	public boolean validateScore(int score) {
-		if (score < 0) {
-			throw new ValidationGameException(String.format("%s:%d", ValidationGameException.SCORE_VALID, score));
-		}
-
-		return true;
-	}
-
-	private boolean isCorrectTeamName(String nameTeam) {
-		return !StringUtils.isBlank(nameTeam);
-	}
 
 }
