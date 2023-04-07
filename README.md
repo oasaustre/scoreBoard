@@ -61,7 +61,7 @@ Finally, The Dependency Inversion principle (DIP) is easy to apply with Spring f
 As the exercise is very simple to carry out the validations, the **Always-Valid Domain Model** guideline has been applied where the Game class itself is in charge of validating its attributes.
 
   
-## Calidad  de  código
+## code quality
 
  To control that the code makes use of quality standards, the **jacoco** and **sonarQube** tools have been used. Two plugins have been included in the pom.xml to be able to interact with them:
 
